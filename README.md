@@ -1,49 +1,87 @@
-# Análise e Desenvolvimento de Relatório Power BI
-
-## Resumo / Destaques Técnicos
-- **Projeto:** Relatório Dinâmico de Vendas em Power BI  
-- **Foco:** Modelagem de Dados, DAX Avançado e Design de Dashboards  
-- **Ferramentas:** Power BI Desktop, DAX, Excel  
-- **Principais Competências:**
-  - Estruturação de modelo estrela (Star Schema)
-  - Desenvolvimento de medidas DAX personalizadas
-  - Aplicação de conceitos de Time Intelligence
-  - Design analítico com foco em UX e acessibilidade
-  - Criação de métricas de Curva ABC (Pareto) e KPIs estratégicos
+# <span style="color:#4B0082;">Análise e Desenvolvimento de Relatório Power BI</span>
 
 ---
 
-## Visão Geral do Projeto
-Este projeto foi desenvolvido como parte de um teste técnico de Business Intelligence (BI), com foco na criação de um relatório dinâmico no Power BI. O objetivo principal foi transformar dados brutos em **insights acionáveis**, aplicando modelagem eficiente, expressões DAX avançadas e design de dashboards voltado à experiência do usuário.
-
-O relatório final possui duas páginas principais, cada uma com função analítica distinta:
-
-1. **Dashboard / Visão Geral:** KPIs estratégicos e principais indicadores de vendas e performance.  
-2. **Análise Detalhada:** Curva ABC (Pareto) e análise de tendências históricas.
+## <span style="color:#6A5ACD;">Resumo / Destaques Técnicos</span>
+<div style="background-color:#F5F5F5; padding:10px; border-radius:5px;">
+<strong>Projeto:</strong> Relatório Dinâmico de Vendas em Power BI<br>
+<strong>Foco:</strong> Modelagem de Dados, DAX Avançado e Design de Dashboards<br>
+<strong>Ferramentas:</strong> Power BI Desktop, DAX, Excel<br>
+<strong>Principais Competências:</strong>
+<ul>
+<li>Estruturação de modelo estrela (Star Schema)</li>
+<li>Desenvolvimento de medidas DAX personalizadas</li>
+<li>Aplicação de conceitos de Time Intelligence</li>
+<li>Design analítico com foco em UX e acessibilidade</li>
+<li>Criação de métricas de Curva ABC (Pareto) e KPIs estratégicos</li>
+</ul>
+</div>
 
 ---
 
-## Modelagem de Dados e Arquitetura
-A estabilidade e performance do relatório dependem de uma **modelagem bem estruturada**. Neste projeto, foi adotado o modelo estrela (Star Schema), prática recomendada em projetos analíticos.
+## <span style="color:#6A5ACD;">Visão Geral do Projeto</span>
+<div style="background-color:#F0F8FF; padding:10px; border-radius:5px;">
+Este projeto foi desenvolvido como parte de um teste técnico de Business Intelligence (BI), com foco na criação de um <strong>relatório dinâmico no Power BI</strong>. O objetivo foi transformar dados brutos em <strong>insights acionáveis</strong>, aplicando modelagem eficiente, expressões DAX avançadas e design de dashboards voltado à experiência do usuário.
+
+### Páginas do Relatório
+<table style="width:100%; border-collapse:collapse;">
+<tr style="background-color:#E6E6FA;">
+<th style="border:1px solid #DCDCDC; padding:5px;">Página</th>
+<th style="border:1px solid #DCDCDC; padding:5px;">Função Analítica</th>
+</tr>
+<tr>
+<td style="border:1px solid #DCDCDC; padding:5px;">Dashboard / Visão Geral</td>
+<td style="border:1px solid #DCDCDC; padding:5px;">KPIs estratégicos e indicadores de vendas e performance</td>
+</tr>
+<tr>
+<td style="border:1px solid #DCDCDC; padding:5px;">Análise Detalhada</td>
+<td style="border:1px solid #DCDCDC; padding:5px;">Curva ABC (Pareto) e análise de tendências históricas</td>
+</tr>
+</table>
+</div>
+
+---
+
+## <span style="color:#6A5ACD;">Modelagem de Dados e Arquitetura</span>
+<div style="background-color:#FFF5EE; padding:10px; border-radius:5px;">
+A estabilidade e performance do relatório dependem de uma <strong>modelagem bem estruturada</strong>. Foi adotado o modelo estrela (Star Schema), prática recomendada em projetos analíticos.
 
 ### Estrutura do Modelo
-- **Tabela de Fatos:** `fVendas` – contém todas as transações.  
-- **Tabelas de Dimensão:** `dCalendario`, `dProdutos`, `dGeografia` – fornecem atributos descritivos.  
 
-Essa arquitetura garante consultas otimizadas e processamento DAX eficiente, mantendo integridade referencial e contexto correto entre medidas.
+<table style="width:100%; border-collapse:collapse;">
+<tr style="background-color:#FFE4E1;">
+<th style="border:1px solid #DCDCDC; padding:5px;">Tipo</th>
+<th style="border:1px solid #DCDCDC; padding:5px;">Nome</th>
+<th style="border:1px solid #DCDCDC; padding:5px;">Descrição</th>
+</tr>
+<tr>
+<td style="border:1px solid #DCDCDC; padding:5px;">Fato</td>
+<td style="border:1px solid #DCDCDC; padding:5px;">fVendas</td>
+<td style="border:1px solid #DCDCDC; padding:5px;">Contém todas as transações</td>
+</tr>
+<tr>
+<td style="border:1px solid #DCDCDC; padding:5px;">Dimensão</td>
+<td style="border:1px solid #DCDCDC; padding:5px;">dCalendario, dProdutos, dGeografia</td>
+<td style="border:1px solid #DCDCDC; padding:5px;">Atributos descritivos para análise</td>
+</tr>
+</table>
 
-### Tabela de Calendário (`dCalendario`)
-- Fundamental para cálculos de **Time Intelligence**.  
-- Criada de forma independente e relacionada à tabela de fatos (1:*), possibilitando comparações temporais precisas, como análises anuais e acumuladas.
+### Tabela de Calendário (dCalendario)
+<ul>
+<li>Fundamental para <strong>Time Intelligence</strong></li>
+<li>Relacionamento 1:* com a tabela de fatos</li>
+<li>Permite comparações temporais precisas (anuais e acumuladas)</li>
+</ul>
+</div>
 
 ---
 
-## Análises e Implementações DAX
+## <span style="color:#6A5ACD;">Análises e Implementações DAX</span>
+<div style="background-color:#F5FFFA; padding:10px; border-radius:5px;">
 
-### Medida: Vendas Brutas LY Exato
-- **Objetivo:** Comparar vendas do ano atual com o ano anterior, limitando o cálculo até o mesmo dia e mês da última transação do ano atual.  
-- **Desafio:** Funções nativas (`SAMEPERIODLASTYEAR`, `DATEADD`) não permitem controle granular do período de corte.  
-- **Solução:** Construção manual do intervalo de datas e aplicação do filtro com `DATESBETWEEN`.  
+### 1. Vendas Brutas LY Exato
+- Comparar vendas do ano atual com o anterior, até o mesmo dia/mês da última transação.
+- Funções nativas não permitem controle granular, então usamos intervalo manual com `DATESBETWEEN`.
 
 ```DAX
 VAR vFinalDates = DATESBETWEEN('dCalendario'[Data], vStartOfYearLY, vFinalEndDate)
