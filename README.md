@@ -1,76 +1,55 @@
-Análise e Desenvolvimento de Relatório Power BI
-Resumo Técnico
+# Análise e Desenvolvimento de Relatório Power BI
 
-Projeto: Relatório Dinâmico de Vendas em Power BI
-Foco: Modelagem de Dados, DAX Avançado e Design de Dashboards
-Ferramentas: Power BI Desktop, DAX, Excel
-Principais Competências Demonstradas:
+## Resumo / Destaques Técnicos
+- **Projeto:** Relatório Dinâmico de Vendas em Power BI  
+- **Foco:** Modelagem de Dados, DAX Avançado e Design de Dashboards  
+- **Ferramentas:** Power BI Desktop, DAX, Excel  
+- **Principais Competências:**
+  - Estruturação de modelo estrela (Star Schema)
+  - Desenvolvimento de medidas DAX personalizadas
+  - Aplicação de conceitos de Time Intelligence
+  - Design analítico com foco em UX e acessibilidade
+  - Criação de métricas de Curva ABC (Pareto) e KPIs estratégicos
 
-Estruturação de modelo estrela (Star Schema)
+---
 
-Desenvolvimento de medidas DAX personalizadas
+## Visão Geral do Projeto
+Este projeto foi desenvolvido como parte de um teste técnico de Business Intelligence (BI), com foco na criação de um relatório dinâmico no Power BI. O objetivo principal foi transformar dados brutos em **insights acionáveis**, aplicando modelagem eficiente, expressões DAX avançadas e design de dashboards voltado à experiência do usuário.
 
-Aplicação de conceitos de Time Intelligence
+O relatório final possui duas páginas principais, cada uma com função analítica distinta:
 
-Design analítico com foco em UX e acessibilidade
+1. **Dashboard / Visão Geral:** KPIs estratégicos e principais indicadores de vendas e performance.  
+2. **Análise Detalhada:** Curva ABC (Pareto) e análise de tendências históricas.
 
-Criação de métricas de Curva ABC (Pareto) e KPIs estratégicos
+---
 
-Visão Geral do Projeto
+## Modelagem de Dados e Arquitetura
+A estabilidade e performance do relatório dependem de uma **modelagem bem estruturada**. Neste projeto, foi adotado o modelo estrela (Star Schema), prática recomendada em projetos analíticos.
 
-Este projeto foi desenvolvido como parte de um teste técnico de Business Intelligence (BI), com foco na criação de um relatório dinâmico no Power BI.
-O principal objetivo foi transformar dados brutos em insights acionáveis, aplicando modelagem de dados eficiente, expressões DAX avançadas e princípios de design de dashboards voltados à experiência do usuário.
+### Estrutura do Modelo
+- **Tabela de Fatos:** `fVendas` – contém todas as transações.  
+- **Tabelas de Dimensão:** `dCalendario`, `dProdutos`, `dGeografia` – fornecem atributos descritivos.  
 
-O relatório final foi dividido em duas páginas principais, cada uma com uma função analítica distinta:
+Essa arquitetura garante consultas otimizadas e processamento DAX eficiente, mantendo integridade referencial e contexto correto entre medidas.
 
-Dashboard / Visão Geral: KPIs estratégicos e principais indicadores de vendas e performance.
+### Tabela de Calendário (`dCalendario`)
+- Fundamental para cálculos de **Time Intelligence**.  
+- Criada de forma independente e relacionada à tabela de fatos (1:*), possibilitando comparações temporais precisas, como análises anuais e acumuladas.
 
-Análise Detalhada: Curva ABC (Pareto) e análise de tendências históricas.
+---
 
-Modelagem de Dados e Arquitetura
+## Análises e Implementações DAX
 
-A estabilidade e a performance do relatório dependem de uma modelagem bem estruturada.
-Neste projeto, foi adotado o modelo estrela (Star Schema), considerado a melhor prática em projetos analíticos.
+### Medida: Vendas Brutas LY Exato
+- **Objetivo:** Comparar vendas do ano atual com o ano anterior, limitando o cálculo até o mesmo dia e mês da última transação do ano atual.  
+- **Desafio:** Funções nativas (`SAMEPERIODLASTYEAR`, `DATEADD`) não permitem controle granular do período de corte.  
+- **Solução:** Construção manual do intervalo de datas e aplicação do filtro com `DATESBETWEEN`.  
 
-Estrutura do Modelo
-
-Tabela de Fatos: fVendas, contendo todas as transações.
-
-Tabelas de Dimensão: dCalendario, dProdutos, dGeografia, entre outras, fornecendo atributos descritivos.
-
-Essa arquitetura garante consultas otimizadas e processamento DAX eficiente, mantendo a integridade referencial e o contexto correto entre medidas.
-
-Tabela de Calendário (dCalendario)
-
-Elemento fundamental para cálculos de Time Intelligence.
-Criada de forma independente e relacionada à tabela de fatos com um vínculo um-para-muitos (1:*), possibilitando cálculos temporais precisos, como comparações entre anos e períodos acumulados.
-
-Análises e Implementações DAX
-
-A camada DAX foi projetada para oferecer métricas precisas, refletindo fielmente as regras de negócio e garantindo flexibilidade nas análises.
-
-1. Medida: Vendas Brutas LY Exato
-
-Objetivo: comparar as vendas do ano atual com o ano anterior, limitando o cálculo do ano anterior até o mesmo dia e mês da última transação registrada no ano atual.
-
-Desafio técnico: as funções de Time Intelligence nativas (SAMEPERIODLASTYEAR, DATEADD) não permitem o controle granular do período de corte.
-A solução envolveu a construção manual do intervalo de datas e a aplicação do filtro com DATESBETWEEN.
-
-Ferramentas utilizadas:
-VAR, DATE, MAX, DATESBETWEEN, IF, KEEPFILTERS.
-
-Exemplo de lógica:
-
--- Lógica que constrói manualmente o período de corte no LY, sem depender de funções de Time Intelligence
-VAR vFinalDates =
-    DATESBETWEEN('dCalendario'[Data], vStartOfYearLY, vFinalEndDate)
-
-VAR vResult =
-    CALCULATE([Vendas brutas], KEEPFILTERS(vFinalDates))
-
-RETURN
-    IF(NOT ISBLANK([Vendas brutas]), vResult)
-
+```DAX
+VAR vFinalDates = DATESBETWEEN('dCalendario'[Data], vStartOfYearLY, vFinalEndDate)
+VAR vResult = CALCULATE([Vendas brutas], KEEPFILTERS(vFinalDates))
+RETURN IF(NOT ISBLANK([Vendas brutas]), vResult)
+```
 
 Essa abordagem garante comparações realistas entre anos, mesmo com bases de dados de diferentes períodos.
 
