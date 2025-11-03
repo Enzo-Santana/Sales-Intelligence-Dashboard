@@ -1,5 +1,10 @@
 # Análise e Desenvolvimento de Relatório Power BI
 
+## Imagens
+![Relatório de Vendas](./Print/Print_Front_END.png)
+
+![Visão Estratégica e & Diagnóstica](./Print/Print_Lilas.png)
+
 ## Resumo / Destaques Técnicos
 <details>
 <summary>Clique para expandir</summary>
